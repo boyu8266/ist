@@ -1,0 +1,12 @@
+# env
+.conda
+
+# test
+.coverage
+report
+
+# log
+logs
+
+# build
+**/*.pyc

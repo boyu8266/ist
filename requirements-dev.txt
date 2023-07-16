@@ -1,0 +1,18 @@
+# data
+pandas
+
+# source
+FinMind>=1.6,<1.7
+stockstats>=0.6.0,<0.7.0
+
+# pipeline design pattern
+tpdp==0.1.0
+
+# log
+logging-singleton
+
+# test
+pytest
+pytest-html
+pytest-cov
+pdoc3
