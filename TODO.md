@@ -1,7 +1,7 @@
 # TODO
 
 - [x] Weekly
-- [ ] Monthly
+- [x] Monthly
 - [ ] CLI tool
 - [ ] Dockerfile
 - [ ] GitHub Action
