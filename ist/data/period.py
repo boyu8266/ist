@@ -10,21 +10,21 @@ class Weekly():
         df_raw['month'] = pd.to_datetime(df_raw['date']).dt.month
         df_raw['day'] = pd.to_datetime(df_raw['date']).dt.day
 
-        df = self.add_week_column(df_raw)
+        df = self.__add_week_column(df_raw)
         group_week = df.groupby(['year', 'week'])
-        self.df = self.create_week_df(group_week)
+        self.df = self.__create_week_df(group_week)
 
-    def add_week_column(self, df: pd.DataFrame) -> pd.DataFrame:
+    def __add_week_column(self, df: pd.DataFrame) -> pd.DataFrame:
         df['week'] = df['timestamp'].map(lambda x: pd.Timestamp(ts_input=x, unit='s', tz='Asia/Taipei').week)
         return df
 
-    def create_week_df(self, group_week) -> pd.DataFrame:
+    def __create_week_df(self, group_week) -> pd.DataFrame:
         df = pd.DataFrame()
 
-        df['open'] = group_week['open'].first()
-        df['close'] = group_week['close'].last()
-        df['high'] = group_week['high'].max()
-        df['low'] = group_week['low'].min()
+        df['Open'] = group_week['Open'].first()
+        df['Close'] = group_week['Close'].last()
+        df['High'] = group_week['High'].max()
+        df['Low'] = group_week['Low'].min()
         df.index = pd.DatetimeIndex(pd.to_datetime(group_week['timestamp'].max() * 1000 * 1000 * 1000))
 
         return df
