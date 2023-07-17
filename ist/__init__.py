@@ -3,6 +3,12 @@ import time
 
 from logging_service import LoggingService
 
+from .strategy import Strategy
+
+__all__ = [
+    'Strategy'
+]
+
 logs: LoggingService = LoggingService()
 if logs.log_file == None:
     folder = 'logs'

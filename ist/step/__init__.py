@@ -1,6 +1,7 @@
 from .fetch import FetchData
 from .indicator import AddKDData, AddMACDData
 from .period import MonthlyStock, WeeklyStock
+from .strategy import VerifyStrategy
 
 __all__ = [
     'FetchData',
@@ -9,5 +10,7 @@ __all__ = [
     'MonthlyStock',
 
     'AddMACDData',
-    'AddKDData'
+    'AddKDData',
+
+    'VerifyStrategy'
 ]
