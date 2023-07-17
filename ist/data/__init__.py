@@ -1,5 +1,6 @@
-from .period import Weekly
+from .period import Monthly, Weekly
 
 __all__ = [
-    'Weekly'
+    'Weekly',
+    'Monthly'
 ]
