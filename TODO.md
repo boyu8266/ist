@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Weekly
+- [x] Weekly
 - [ ] Monthly
 - [ ] CLI tool
 - [ ] Dockerfile
