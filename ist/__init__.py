@@ -3,12 +3,20 @@ import time
 
 from logging_service import LoggingService
 
+from .config import Config
+from .pipeline import DayDataPipeline, MonthDataPipeline, WeekDataPipeline
 from .strategy import Strategy
 
 __all__ = [
-    'Strategy'
+    'Strategy',
+
+    'DayDataPipeline',
+    'WeekDataPipeline',
+    'MonthDataPipeline'
 ]
 
+# instance
+config: Config = Config.from_config_file()
 logs: LoggingService = LoggingService()
 if logs.log_file == None:
     folder = 'logs'
