@@ -3,7 +3,7 @@
 - [x] Weekly
 - [x] Monthly
 - [x] Config
-- [ ] Telegram Notification
+- [x] Telegram Notification
 - [ ] CLI tool
 - [ ] Dockerfile
 - [ ] Database
