@@ -11,6 +11,8 @@ class VerifyStrategy(Step):
         if state == None or not isinstance(state.strategy, Strategy):
             raise ValueError(f'state == None or not isinstance(state.strategy, Strategy)')
 
+        state.strategy.dataframe = state.dataframe
+
         if state.strategy.condition_for_buying_stock():
             state.buy = True
 

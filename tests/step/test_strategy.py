@@ -15,11 +15,11 @@ class TestVerifyStrategy:
 
     def test_buying_is_true(self):
         class Buy(Strategy):
-            def condition_for_buying_stock(self, **kwargs) -> bool:
+            def condition_for_buying_stock(self) -> bool:
                 return True
 
-            def condition_for_selling_stock(self, **kwargs) -> bool:
-                return super().condition_for_selling_stock(**kwargs)
+            def condition_for_selling_stock(self) -> bool:
+                return super().condition_for_selling_stock()
 
         buy = Buy()
         state = IstState(strategy=buy)
@@ -29,10 +29,10 @@ class TestVerifyStrategy:
 
     def test_selling_is_true(self):
         class Sell(Strategy):
-            def condition_for_buying_stock(self, **kwargs) -> bool:
-                return super().condition_for_buying_stock(**kwargs)
+            def condition_for_buying_stock(self) -> bool:
+                return super().condition_for_buying_stock()
 
-            def condition_for_selling_stock(self, **kwargs) -> bool:
+            def condition_for_selling_stock(self) -> bool:
                 return True
 
         sell = Sell()
