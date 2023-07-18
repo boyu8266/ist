@@ -4,6 +4,7 @@
 - [x] Monthly
 - [x] Config
 - [x] Telegram Notification
+- [ ] Custom Strategy
 - [ ] CLI tool
 - [ ] Dockerfile
 - [ ] Database
