@@ -11,3 +11,6 @@ tpdp==0.1.0
 
 # log
 logging-singleton
+
+# telegram bot
+pyTelegramBotAPI
