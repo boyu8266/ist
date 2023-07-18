@@ -8,5 +8,8 @@ report
 # log
 logs
 
+# config
+config.ini
+
 # build
 **/*.pyc
