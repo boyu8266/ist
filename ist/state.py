@@ -18,5 +18,7 @@ class IstState(State):
     buy: bool = False
     sell: bool = False
 
+    period: str = 'Day'
+
     class Config:
         arbitrary_types_allowed = True
