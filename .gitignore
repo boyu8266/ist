@@ -10,7 +10,6 @@ logs
 
 # custom
 config.ini
-ist/custom.py
 
 # build
 **/*.pyc
