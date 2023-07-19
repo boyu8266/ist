@@ -33,11 +33,20 @@ setup(
         # source
         'FinMind>=1.6,<1.7',
         'stockstats>=0.6.0,<0.7.0',
+        'backtesting',
 
         # pipeline design pattern
         'tpdp==0.1.0',
 
         # log
-        'logging-singleton'
+        'logging-singleton',
+
+        # telegram bot
+        'pyTelegramBotAPI'
     ],
+    entry_points={
+        'console_scripts': [
+            'ist=ist.__main__:main',
+        ],
+    },
 )
