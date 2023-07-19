@@ -31,4 +31,4 @@ build:
 
 .PHONY: run
 run:
-	docker run -v ./config.ini:/app/config.ini ist:0.1.0
+	docker run --name ist -v ./config.ini:/app/config.ini ist:0.1.0
