@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import Any, Callable
 
 import telebot
@@ -16,9 +17,10 @@ class TelegramNotify(Step):
         df = state.dataframe
 
         bot = telebot.TeleBot(token)
+        date = df.index[-1].strftime('%Y-%m-%d') if isinstance(df.index[-1], datetime) else df.index[-1]
         message_text = f"""
 [{state.stock} - {state.period}]
-Data Date: {df.index[-1].strftime('%Y-%m-%d')}
+Data Date: {date}
 -----
 Close: {round(df.close[-1], 3)}
 -----
