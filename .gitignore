@@ -8,8 +8,12 @@ report
 # log
 logs
 
-# config
+# custom
 config.ini
+ist/custom.py
 
 # build
 **/*.pyc
+**.egg-info
+build
+dist
