@@ -18,6 +18,8 @@ class TelegramNotify(Step):
         bot = telebot.TeleBot(token)
         message_text = f"""
 [{state.stock} - {state.period}]
+Data Date: {df.index[-1].strftime('%Y-%m-%d')}
+-----
 Close: {round(df.close[-1], 3)}
 -----
 K: {round(df.k[-1], 3)}
