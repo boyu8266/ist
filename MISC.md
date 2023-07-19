@@ -1,3 +1,3 @@
 # MISC
 
-- [ ] ist.state.period
+- [x] ist.state.period
