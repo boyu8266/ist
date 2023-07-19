@@ -1,4 +1,6 @@
 # Python Investment Strategy Tracker
+- [Python Investment Strategy Tracker](#python-investment-strategy-tracker)
+  - [Basic Information](#basic-information)
 
 ## Basic Information
 | Key            | Value       |

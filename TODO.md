@@ -4,9 +4,9 @@
 - [x] Monthly
 - [x] Config
 - [x] Telegram Notification
-- [ ] Custom Strategy
-- [ ] CLI tool
-- [ ] Dockerfile
+- [x] Custom Strategy
+- [x] CLI tool
+- [x] Dockerfile
 - [ ] Database
 - [ ] Docker Compose
 - [ ] GitHub Action
