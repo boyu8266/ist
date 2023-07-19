@@ -33,14 +33,18 @@ class PeriodDataPipeline(ABC):
     def get_steps(self) -> List[Step]:
         pass
 
-    def run(self, stock: str, strategy: Strategy, period: str, start_date: str = '1997-01-01', end_date: str = datetime.now().strftime("%Y-%m-%d"), timeout: int = 30) -> IstState:
+    @abstractmethod
+    def get_period(self) -> str:
+        pass
+
+    def run(self, stock: str, strategy: Strategy, start_date: str = '1997-01-01', end_date: str = datetime.now().strftime("%Y-%m-%d"), timeout: int = 30) -> IstState:
         state: IstState = IstState(
             stock=stock,
             start_date=start_date,
             end_date=end_date,
             timeout=timeout,
             strategy=strategy,
-            period=period
+            period=self.get_period()
         )
         r = self.__pipeline.run(state)
         return state
@@ -50,12 +54,21 @@ class DayDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
         return [fetchdata, addmacddata, addkddata, verifystrategy, telegramnotify]
 
+    def get_period(self) -> str:
+        return 'Day'
+
 
 class WeekDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
         return [fetchdata, weeklystock, addmacddata, addkddata, verifystrategy, telegramnotify]
 
+    def get_period(self) -> str:
+        return 'Week'
+
 
 class MonthDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
         return [fetchdata, monthlystock, addmacddata, addkddata, verifystrategy, telegramnotify]
+
+    def get_period(self) -> str:
+        return 'Month'
