@@ -13,6 +13,7 @@ class IstState(State):
     timeout: int = 30
 
     dataframe: pd.DataFrame = pd.DataFrame()
+    rawdataframe: pd.DataFrame = pd.DataFrame()
 
     strategy: Strategy = None
     buy: bool = False

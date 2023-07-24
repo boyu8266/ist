@@ -42,23 +42,15 @@ Sell: {state.sell}
 
 
 class TelegramSendChart(Step):
-    def run(self, state: IstState, pipeline_abort: Callable[[], None] | None = None, **kwargs: Any) -> IstState:
-        config = Config.from_config_file()
-        token = config.telegram_token
-        userid = config.telegram_userid
-
-        df = state.dataframe
-
-        bot = telebot.TeleBot(token)
-
+    def __get_buf(self, df) -> io.BytesIO:
         fig = plt.figure()
         gs = gridspec.GridSpec(3, 1, height_ratios=[2, 1, 1])
         ax0 = plt.subplot(gs[0])
-        state.dataframe['close'].tail(60).plot(ax=ax0)
+        df['close'].tail(60).plot(ax=ax0)
         ax1 = plt.subplot(gs[1], sharex=ax0)
-        state.dataframe[['k', 'd']].tail(60).plot(ax=ax1, color=['#DF3D2E', '#21C49C'])
+        df[['k', 'd']].tail(60).plot(ax=ax1, color=['#DF3D2E', '#21C49C'])
         ax2 = plt.subplot(gs[2], sharex=ax0)
-        state.dataframe[['macd', 'dif']].tail(60).plot(ax=ax2, color=['#F8CD9E', '#FB9D7E'])
+        df[['macd', 'dif']].tail(60).plot(ax=ax2, color=['#F8CD9E', '#FB9D7E'])
 
         plt.subplots_adjust(hspace=.0)
         ax0.grid()
@@ -68,5 +60,20 @@ class TelegramSendChart(Step):
         plt.savefig(buf, format='png')
         buf.seek(0)
         plt.close()
-        bot.send_photo(userid, buf)
+        return buf
+
+    def run(self, state: IstState, pipeline_abort: Callable[[], None] | None = None, **kwargs: Any) -> IstState:
+        config = Config.from_config_file()
+        token = config.telegram_token
+        userid = config.telegram_userid
+
+        bot = telebot.TeleBot(token)
+        list_item = []
+        if not state.rawdataframe.empty:
+            list_item.append(state.rawdataframe)
+        list_item.append(state.dataframe)
+
+        for item in list_item:
+            buf = self.__get_buf(item)
+            bot.send_photo(userid, buf)
         return state

@@ -12,6 +12,9 @@ class AddMACDData(Step):
             raise ValueError(f'state == None or state.dataframe.empty')
 
         state.dataframe = MACD.add_columns(state.dataframe)
+
+        if not state.rawdataframe.empty:
+            state.rawdataframe = MACD.add_columns(state.rawdataframe)
         return state
 
 
@@ -21,4 +24,7 @@ class AddKDData(Step):
             raise ValueError(f'state == None or state.dataframe.empty')
 
         state.dataframe = KD.add_columns(state.dataframe)
+
+        if not state.rawdataframe.empty:
+            state.rawdataframe = KD.add_columns(state.rawdataframe)
         return state
