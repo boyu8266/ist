@@ -4,11 +4,14 @@ import time
 
 from logging_service import LoggingService
 
+from .__version__ import __version__
 from .config import Config
 from .pipeline import DayDataPipeline, MonthDataPipeline, WeekDataPipeline
 from .strategy import Strategy
 
 __all__ = [
+    '__version__',
+
     'Strategy',
 
     'DayDataPipeline',

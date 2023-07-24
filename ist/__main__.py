@@ -3,7 +3,7 @@ from datetime import datetime
 
 from logging_service import LoggingService
 
-from ist import config, sleep
+from ist import __version__, config, sleep
 from ist.custom import *
 from ist.pipeline import (DayDataPipeline, MonthDataPipeline,
                           PeriodDataPipeline, WeekDataPipeline)
@@ -11,6 +11,8 @@ from ist.strategy import Strategy
 
 
 def main():
+    print(f'version: {__version__}')
+
     parser = argparse.ArgumentParser(description="IST Data Pipeline")
 
     parser.add_argument("--number", "-n", type=str, help="Number parameter")
