@@ -16,7 +16,8 @@ monthlystock = MonthlyStock('monthly stock')
 addmacddata = AddMACDData('add macd data')
 addkddata = AddKDData('add kd data')
 verifystrategy = VerifyStrategy('verify stratrgy')
-telegramnotify = TelegramNotify('telegram notify')
+telegramtextnotify = TelegramTextNotify('telegram notify')
+telegramsendchart = TelegramSendChart('telegram send chart')
 
 
 class PeriodDataPipeline(ABC):
@@ -52,7 +53,7 @@ class PeriodDataPipeline(ABC):
 
 class DayDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
-        return [fetchdata, addmacddata, addkddata, verifystrategy, telegramnotify]
+        return [fetchdata, addmacddata, addkddata, verifystrategy, telegramtextnotify, telegramsendchart]
 
     def get_period(self) -> str:
         return 'Day'
@@ -60,7 +61,7 @@ class DayDataPipeline(PeriodDataPipeline):
 
 class WeekDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
-        return [fetchdata, weeklystock, addmacddata, addkddata, verifystrategy, telegramnotify]
+        return [fetchdata, weeklystock, addmacddata, addkddata, verifystrategy, telegramtextnotify, telegramsendchart]
 
     def get_period(self) -> str:
         return 'Week'
@@ -68,7 +69,7 @@ class WeekDataPipeline(PeriodDataPipeline):
 
 class MonthDataPipeline(PeriodDataPipeline):
     def get_steps(self) -> List[Step]:
-        return [fetchdata, monthlystock, addmacddata, addkddata, verifystrategy, telegramnotify]
+        return [fetchdata, monthlystock, addmacddata, addkddata, verifystrategy, telegramtextnotify, telegramsendchart]
 
     def get_period(self) -> str:
         return 'Month'
