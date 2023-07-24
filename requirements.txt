@@ -1,5 +1,6 @@
 # data
 pandas
+matplotlib
 
 # source
 FinMind>=1.6,<1.7
