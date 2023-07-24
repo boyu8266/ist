@@ -11,7 +11,7 @@ from ist.config import Config
 from ist.state import IstState
 
 
-class TelegramTextNotify(Step):
+class TelegramSendTextInfo(Step):
     def run(self, state: IstState, pipeline_abort: Callable[[], None] | None = None, **kwargs: Any) -> IstState:
         config = Config.from_config_file()
         token = config.telegram_token
