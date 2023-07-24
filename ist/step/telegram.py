@@ -42,15 +42,15 @@ Sell: {state.sell}
 
 
 class TelegramSendChart(Step):
-    def __get_buf(self, df) -> io.BytesIO:
+    def __get_buf(self, df, n: int = 60) -> io.BytesIO:
         fig = plt.figure()
         gs = gridspec.GridSpec(3, 1, height_ratios=[2, 1, 1])
         ax0 = plt.subplot(gs[0])
-        df['close'].tail(60).plot(ax=ax0)
+        df['close'].tail(n).plot(ax=ax0)
         ax1 = plt.subplot(gs[1], sharex=ax0)
-        df[['k', 'd']].tail(60).plot(ax=ax1, color=['#DF3D2E', '#21C49C'])
+        df[['k', 'd']].tail(n).plot(ax=ax1, color=['#DF3D2E', '#21C49C'])
         ax2 = plt.subplot(gs[2], sharex=ax0)
-        df[['macd', 'dif']].tail(60).plot(ax=ax2, color=['#F8CD9E', '#FB9D7E'])
+        df[['macd', 'dif']].tail(n).plot(ax=ax2, color=['#F8CD9E', '#FB9D7E'])
 
         plt.subplots_adjust(hspace=.0)
         ax0.grid()
@@ -70,10 +70,12 @@ class TelegramSendChart(Step):
         bot = telebot.TeleBot(token)
         list_item = []
         if not state.rawdataframe.empty:
-            list_item.append(state.rawdataframe)
-        list_item.append(state.dataframe)
+            dt = {'df': state.rawdataframe, 'n': 10}
+            list_item.append(dt)
+        dt = {'df': state.dataframe, 'n': 60}
+        list_item.append(dt)
 
         for item in list_item:
-            buf = self.__get_buf(item)
+            buf = self.__get_buf(item['df'], item['n'])
             bot.send_photo(userid, buf)
         return state
