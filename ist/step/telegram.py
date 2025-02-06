@@ -25,14 +25,14 @@ class TelegramSendTextInfo(Step):
 [{state.stock} - {state.period}]
 Data Date: {date}
 -----
-Close: {round(df.close[-1], 3)}
+Close: {round(df.iloc[-1]['close'], 3)}
 -----
-K: {round(df.k[-1], 3)}
-D: {round(df.d[-1], 3)}
+K: {round(df.iloc[-1]['k'], 3)}
+D: {round(df.iloc[-1]['d'], 3)}
 -----
-MACD: {round(df.macd[-1], 3)}
-DIF: {round(df.dif[-1], 3)}
-OSC: {round(df.osc[-1], 3)}
+MACD: {round(df.iloc[-1]['macd'], 3)}
+DIF: {round(df.iloc[-1]['dif'], 3)}
+OSC: {round(df.iloc[-1]['osc'], 3)}
 -----
 Buy: {state.buy}
 Sell: {state.sell}
