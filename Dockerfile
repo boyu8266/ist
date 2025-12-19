@@ -1,11 +1,12 @@
-FROM python:3.11.4-slim-bullseye
+FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY requirements.txt setup.py config.ini ./
-COPY ist ./ist
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
-RUN python setup.py install
+COPY . .
 
-ENTRYPOINT ["ist"]
+RUN pip install --no-cache-dir -e .
+
+CMD ["ist"]

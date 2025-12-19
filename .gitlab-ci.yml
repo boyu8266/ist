@@ -1,0 +1,27 @@
+stages:
+  - build
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: tcp://docker:2375
+  IMAGE_NAME: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  LATEST_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+build-and-push:
+  stage: build
+  image: docker:24
+  services:
+    - name: docker:24-dind
+      command: ["--mtu=1500"]
+  before_script:
+    - docker version
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker run --privileged --rm tonistiigi/binfmt --install arm64
+    - docker buildx version
+    - docker buildx create --use
+    - docker buildx inspect --bootstrap
+  script:
+    - docker buildx build --platform linux/amd64,linux/arm64 -t "$IMAGE_NAME" -t "$LATEST_IMAGE" --push .
+  only:
+    - tags
