@@ -29,6 +29,7 @@ setup(
     install_requires=[
         # data
         'pandas',
+        'matplotlib',
 
         # source
         'FinMind>=1.6,<1.7',
@@ -42,7 +43,7 @@ setup(
         'logging-singleton',
 
         # telegram bot
-        'pyTelegramBotAPI'
+        'pyTelegramBotAPI==4.26.0'
     ],
     entry_points={
         'console_scripts': [

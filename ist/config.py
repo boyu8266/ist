@@ -1,4 +1,6 @@
+import os
 from configparser import ConfigParser
+from pathlib import Path
 from typing import List
 
 from pydantic import BaseModel
@@ -14,7 +16,27 @@ class Config(BaseModel):
     @classmethod
     def from_config_file(cls):
         config = ConfigParser()
-        config.read('config.ini')
+        
+        config_paths = [
+            'config.ini',
+            os.path.expanduser('~/.config/ist/config.ini'),
+        ]
+        
+        config_file = None
+        for path in config_paths:
+            if os.path.exists(path):
+                config_file = path
+                break
+        
+        if not config_file:
+            raise FileNotFoundError(
+                f"Config file not found. Please create one at:\n"
+                f"  - Current directory: ./config.ini\n"
+                f"  - User config: ~/.config/ist/config.ini\n"
+                f"Reference: config.example.ini"
+            )
+        
+        config.read(config_file)
 
         numbers = [num.strip() for num in config.get('Strategy', 'numbers').split(',')]
         strategies = [strategy.strip() for strategy in config.get('Strategy', 'strategies').split(',')]

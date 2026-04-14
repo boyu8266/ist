@@ -6,6 +6,6 @@ class KD:
     @staticmethod
     def add_columns(df_raw: pd.DataFrame) -> pd.DataFrame:
         ser = StockDataFrame.retype(df_raw)
-        df_raw['k'] = ser['kdjk']
-        df_raw['d'] = ser['kdjd']
+        df_raw['k'] = ser['kdjk'].values
+        df_raw['d'] = ser['kdjd'].values
         return df_raw

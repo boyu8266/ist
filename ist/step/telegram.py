@@ -25,7 +25,7 @@ class TelegramSendTextInfo(Step):
 [{state.stock} - {state.period}]
 Data Date: {date}
 -----
-Close: {round(df.iloc[-1]['close'], 3)}
+Close: {round(df.iloc[-1]['Close'], 3)}
 -----
 K: {round(df.iloc[-1]['k'], 3)}
 D: {round(df.iloc[-1]['d'], 3)}
@@ -46,7 +46,7 @@ class TelegramSendChart(Step):
         fig = plt.figure()
         gs = gridspec.GridSpec(3, 1, height_ratios=[2, 1, 1])
         ax0 = plt.subplot(gs[0])
-        df['close'].tail(n).plot(ax=ax0)
+        df['Close'].tail(n).plot(ax=ax0)
         ax1 = plt.subplot(gs[1], sharex=ax0)
         df[['k', 'd']].tail(n).plot(ax=ax1, color=['#DF3D2E', '#21C49C'])
         ax2 = plt.subplot(gs[2], sharex=ax0)
